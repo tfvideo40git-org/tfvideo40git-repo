@@ -25,7 +25,7 @@ jobs:
         role-to-assume: arn:aws:iam:461055178737:role/
         with:
           aws-region: ap-south-1
-          role-to-assume: aws:iam::026090537846:oidc-provider/token.actions.githubusercontent.com
+          role-to-assume: arn:aws:iam::026090537846:oidc-provider/token.actions.githubusercontent.com
 
     - run: aws sts get-caller-identity
 
