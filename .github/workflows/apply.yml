@@ -8,7 +8,7 @@ on:
 jobs:
   terrafom:
     name: 'Terraform' 
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     permissions:
       id-token: write
