@@ -1,12 +1,14 @@
-name: 'Terraform-Github-Destroy'
+name: 'Terraform-Github-apply'
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+    - main
 
 jobs:
-  tf-destroy:
-    name: 'Terraform'
-    runs-on: ubuntu-latest   
+  terrafom:
+    name: 'Terraform' 
+    run-on: ubuntu-latest
 
     permissions:
       id-token: write
@@ -14,10 +16,10 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      users: actions/checkout@v3
 
     - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
+      users: aws-actions/configure-aws-credentials@v1
       with:
         aws-region: ap-south-1
         role-to-assume: arn:aws:iam:461055178737:role/
@@ -28,7 +30,7 @@ jobs:
     - run: aws sts get-caller-identity
 
     - name: Terraform Init 
-      run: terraform init
+      run: terraform Init
 
     - name: Terraform validate
       run: terraform validate
@@ -36,5 +38,7 @@ jobs:
     - name: Terraform plan
       run: terraform plan
 
-    - name: Terraform destroy
-      run: terraform destroy -auto-approve
+    - name: terraform apply 
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terraform apply -auto-approve -input=true
+      
