@@ -22,7 +22,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-region: ap-south-1
-        role-to-assume: arn:aws:iam::026090537846:oidc-provider/token.actions.githubusercontent.com
+        role-to-assume: arn:aws:iam::026090537846:role/tfvideo40git-action
         
     - run: aws sts get-caller-identity
 
